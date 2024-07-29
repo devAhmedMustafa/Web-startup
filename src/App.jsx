@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 import './App.css'
 import SearchBar from './components/SearchBar'
 import Background, { ChangeBackground } from './components/Background'
@@ -9,6 +9,7 @@ export const BackgroundContext = createContext(undefined)
 function App() {
 
   const [background, setBackground] = useState(localStorage['background']?localStorage['background']:"")
+
 
   return (
     <div className='flex flex-col items-center'>
