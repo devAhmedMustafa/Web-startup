@@ -66,13 +66,13 @@ export default function SearchBar(){
                 
                 {
                     isFocus &&
-                    <div className="absolute top-16 left-0 w-full px-4 stay-focus">
-                        <ul className="bg-[#202020da] rounded-md shadow-md stay-focus">
+                    <div className="absolute top-16 left-0 w-full px-4 stay-focus z-50">
+                        <ul className="bg-[#202020da] rounded-md shadow-md stay-focus w-full">
                             {history.map((item, index)=>{
                                 return(
                                     <li key={index} className="py-2 px-4 w-full hover:bg-violet-800 stay-focus
                                     ">
-                                        <a target="_blank" href={"https://www.google.com/search?q="+item} className="text-neutral-300 text-sm stay-focus">{item}</a>
+                                        <a target="_blank" href={"https://www.google.com/search?q="+item} className="text-neutral-300 text-sm stay-focus w-full">{item}</a>
                                         
                                     </li>
                                 )})
