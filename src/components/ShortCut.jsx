@@ -1,8 +1,11 @@
 import { Icon } from "@iconify-icon/react";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import "./Shorten.css"
+import { shortensContext } from "./ShortCutsGroup";
 
 export default function ShortCut({icon, url, shorten}){
+
+    const {shorts, setShorts} = useContext(shortensContext)
 
     const ref = useRef();
     const [rect, setRect] = useState([0, 0])
@@ -38,9 +41,6 @@ export default function ShortCut({icon, url, shorten}){
 
         const r = ref.current.getBoundingClientRect();
         setRect([r.left, r.top])
-
-
-       
     }, [])
 
     useEffect(()=>{
@@ -51,11 +51,19 @@ export default function ShortCut({icon, url, shorten}){
         }
     }, [rect])
 
+    const deleteShorten = ()=>{
+        setShorts(shorts.filter(short => short.shorten != shorten))
+    }
+
     return (
-        <div className="size-16 flex justify-center items-center relative overflow-visible shorten">
+        <div className="size-20 flex justify-center items-center relative overflow-visible shorten">
 
 
-            <a href={url} target="_blank" ref={ref} className="bg-neutral-700 rounded-full transition-all cursor-pointer duration-100 flex justify-center items-center">
+            <button onClick={deleteShorten} className="bg-red-600 px-2 bottom-0 py-1 right-0 z-20 rounded-full flex duration-300 absolute opacity-0 transition-all">
+                <i className="fa-solid fa-trash text-sm"></i>
+            </button>
+
+            <a href={url} target="_blank" ref={ref} className="bg-neutral-700 rounded-full transition-all duration-100 flex justify-center items-center">
                 <Icon className="text-3xl" icon={icon}/>
             </a>
 

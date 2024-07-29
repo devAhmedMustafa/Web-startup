@@ -2,3 +2,7 @@
     opacity: 1;
     top: -10px
 }
+
+.shorten:hover button{
+    opacity: 1;
+}

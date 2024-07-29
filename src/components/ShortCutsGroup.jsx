@@ -1,5 +1,7 @@
-import { useEffect, useState } from "react"
+import { createContext, useEffect, useState } from "react"
 import ShortCut from "./ShortCut"
+
+export const shortensContext = createContext(undefined)
 
 export default function ShortCutsGroup(){
     
@@ -19,22 +21,28 @@ export default function ShortCutsGroup(){
 
     return (
         <div className="flex flex-col gap-10">
-            <div className="flex flex-wrap gap-2 items-center justify-center">
 
-                {shorts.map((s, id)=>
+            <shortensContext.Provider value={{shorts, setShorts}}>
 
-                <ShortCut key={id}
-                    url={s.url}
-                    shorten={s.shorten}
-                    icon={s.icon}
-                />
+                <div className="flex flex-wrap gap-2 items-center justify-center">
 
-                )}
+                    {shorts.map((s, id)=>
 
-                <div className="size-12 flex justify-center items-center bg-neutral-700 rounded-full">
-                    <button onClick={showForm} className="size-full"><i className="fa-solid fa-plus"></i></button>
+                    <ShortCut key={id}
+                        url={s.url}
+                        shorten={s.shorten}
+                        icon={s.icon}
+                    />
+
+                    )}
+
+                    <div className="size-12 flex justify-center items-center bg-neutral-700 rounded-full">
+                        <button onClick={showForm} className="size-full"><i className="fa-solid fa-plus"></i></button>
+                    </div>
                 </div>
-            </div>
+
+            </shortensContext.Provider>
+
 
             <AddShorten setShorts={setShorts}/>
 
